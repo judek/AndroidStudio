@@ -9,22 +9,20 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Generate Time Stamp"
         android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="149dp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/textView"
+        android:textColor="#FFFFFF"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#FFFFFF" />
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,9 +30,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="judek.com"
         android:id="@+id/textView2"
-        android:layout_above="@+id/button"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
-        android:textColor="#FFFFFF" />
+        android:layout_marginTop="81dp" />
 
 </RelativeLayout>

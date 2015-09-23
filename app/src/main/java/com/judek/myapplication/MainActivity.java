@@ -1,5 +1,7 @@
 package com.judek.myapplication;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.view.View;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 
@@ -26,7 +31,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 TextView iv = (TextView) findViewById(R.id.textView);
-                iv.setText("Jude");
+                java.util.Date date= new java.util.Date();
+                System.out.println(new Timestamp(date.getTime()));
+                Timestamp ts = new Timestamp(date.getTime());
+                String S =new SimpleDateFormat("MM/dd/yyyy h:mm:ss a").format(ts);
+                iv.setText(S);
+
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+                //We need API 11
+                //ClipData clip = ClipData.newPlainText("label", "Text to copy");
+                //clipboard.setPrimaryClip(clip);
 
             }
         });
