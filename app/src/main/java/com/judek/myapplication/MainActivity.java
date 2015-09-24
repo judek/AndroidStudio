@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.view.View;
+import android.widget.Toast;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,23 +29,49 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button button = (Button) findViewById(R.id.button);
 
+        final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
+        final CheckBox checkBoxSeconds = (CheckBox) findViewById(R.id.checkBoxSeconds);
+        final CheckBox checkBox24 = (CheckBox) findViewById(R.id.checkBox24);
+
         button.setOnClickListener(new OnClickListener()
         {
             public void onClick(View v)
             {
                 TextView iv = (TextView) findViewById(R.id.textView);
+
+                String strFormat = "";
+
+
+                if(true == checkBox24.isChecked()) {
+                    strFormat = "MM/dd/yyyy HH:mm";
+                }
+                else{
+                    strFormat = "MM/dd/yyyy h:mm a";
+                }
+
+                if(true == checkBoxSeconds.isChecked()) {
+                    //strFormat = "MM/dd/yyyy h:mm:ss a";
+                    strFormat = strFormat.replace(":mm", ":mm:ss");
+                }
+
+
+
                 java.util.Date date= new java.util.Date();
-                System.out.println(new Timestamp(date.getTime()));
                 Timestamp ts = new Timestamp(date.getTime());
-                String S =new SimpleDateFormat("MM/dd/yyyy h:mm:ss a").format(ts);
+                String S =new SimpleDateFormat(strFormat).format(ts);
                 iv.setText(S);
 
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                if(true == checkBox.isChecked()) {
 
-                //We need API 11
-                //ClipData clip = ClipData.newPlainText("label", "Text to copy");
-                //clipboard.setPrimaryClip(clip);
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
+                    //We need API 11
+                    ClipData clip = ClipData.newPlainText("label", S);
+                    clipboard.setPrimaryClip(clip);
+
+                    Toast.makeText(v.getContext(), "Time stamp copied to clipboard", Toast.LENGTH_LONG)
+                            .show();
+                }
             }
         });
 
